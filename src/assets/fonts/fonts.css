@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'al-majeed-arabic-font';
+  src: url('./Al Majeed Quranic Font_shiped.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'indo-pak-arabic-font';
+  src: url('./Naskh-Nastaleeq-IndoPak-QWBW.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
