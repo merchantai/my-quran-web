@@ -4,9 +4,15 @@
       <PageHeader />
     </div>
     <div class="content" :style="contentStyles" ref="swipeArea">
-      <p class="text" :style="styles">
+      <!-- <p class="text" :style="styles">
         {{ currentPageText }}
-      </p>
+      </p> -->
+      <div :style="styles" v-for="ayah in currentPage" :key="ayah.number">
+        <div v-if="ayah.numberInSurah === 1 && ayah.number !== 1">
+          <SuraStart :suraNumber="getSuraNumber(ayah.number)"/>
+        </div>
+        <p class="text">{{ ayah.text }}</p>
+      </div>
     </div>
     <div class="footer">
       <PageFooter />
@@ -17,10 +23,11 @@
 <script setup>
 import { onMounted, ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import PageHeader from '@components/PageHeader.vue'
-import PageFooter from '@components/PageFooter.vue'
 import { useState } from '@store/state'
 import { useSwipe } from '@vueuse/core'
+import PageHeader from '@components/PageHeader.vue'
+import PageFooter from '@components/PageFooter.vue'
+import SuraStart from '@components/SuraStart.vue'
 
 const state = useState()
 const router = useRouter()
@@ -34,18 +41,26 @@ const styles = {
   backgroundColor: state.backgroundColor,
 }
 const contentStyles = {
-  border: `1px solid ${state.textColor}`
+  border: `1px solid ${state.textColor}`,
+  margin: '10px'
 }
 
 onMounted(() => {
   currentPage.value = getPage()
 })
 
-const currentPageText = computed(() => {
-  return currentPage.value.length
-    ? currentPage.value.map(item => item.text).join(' ')
-    : ''
-})
+// const currentPageText = computed(() => {
+//   return currentPage.value.length
+//     ? createPage()
+//     : ''
+// })
+
+// const createPage = () => {
+//   let pageText = {}
+//   currentPage.value.forEach(item => {
+
+//   })
+// }
 
 const getPage = () => {
   const text = []
@@ -57,21 +72,30 @@ const getPage = () => {
   return text
 }
 
+const getSuraNumber = (number) => {
+  return state.quran.find(surah => 
+    surah.ayahs.some(ayah => ayah.number === number)
+  )?.number || null;
+}
+
 // Initialize swipe detection
 const { direction } = useSwipe(swipeArea, {
   threshold: 30,
   onSwipeEnd: () => {
     if (direction.value === 'left') {
-      state.setCurrentPageNumber(state.currentPage - 1)
+      state.currentPage !== 1 && state.setCurrentPageNumber(state.currentPage - 1)
       router.replace({name: 'previousPage', params: {pageNumber: state.currentPage}})
     } else if (direction.value === 'right') {
-      state.setCurrentPageNumber(state.currentPage + 1)
+      state.currentPage !== 604 && state.setCurrentPageNumber(state.currentPage + 1)
       router.replace({name: 'nextPage', params: {pageNumber: state.currentPage}})
     }
   },
 })
 </script>
 <style scoped>
+.content {
+  overflow-x: hidden;
+}
 .text {
   direction: rtl;
   font-family: var(--arabic-indo-pak-font);
@@ -81,5 +105,7 @@ const { direction } = useSwipe(swipeArea, {
   text-decoration: underline;
   text-underline-offset: 15px;
   text-decoration-thickness: 2px;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 </style>
