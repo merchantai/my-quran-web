@@ -1,17 +1,14 @@
 <template>
-  <div>
+  <div class="page">
     <div class="header">
-      <PageHeader />
+      <PageHeader :juzStart="juzStart"/>
     </div>
     <div class="content" :style="contentStyles" ref="swipeArea">
-      <!-- <p class="text" :style="styles">
-        {{ currentPageText }}
-      </p> -->
-      <div :style="styles" v-for="ayah in currentPage" :key="ayah.number">
-        <div v-if="ayah.numberInSurah === 1 && ayah.number !== 1">
-          <SuraStart :suraNumber="getSuraNumber(ayah.number)"/>
+      <div class="page-wrapper" v-for="(ayah, index) in pageStructure" :key="index">
+        <div v-if="ayah.number !== 0">
+          <SuraStart class="sura-start" :suraNumber="getSuraNumber(ayah.number)"/>
         </div>
-        <p class="text">{{ ayah.text }}</p>
+        <p :style="styles" class="text" v-html="ayah.text"></p>
       </div>
     </div>
     <div class="footer">
@@ -21,23 +18,29 @@
 </template>
 
 <script setup>
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useState } from '@store/state'
 import { useSwipe } from '@vueuse/core'
 import PageHeader from '@components/PageHeader.vue'
 import PageFooter from '@components/PageFooter.vue'
 import SuraStart from '@components/SuraStart.vue'
+import sajdaIcon from '@/assets/icons/sajda.svg'
+import qtr from '@/assets/icons/qtr.svg'
+import tqtr from '@/assets/icons/tqtr.svg'
+import half from '@/assets/icons/half.svg'
 
 const state = useState()
 const router = useRouter()
 const currentPage = ref([])
 const swipeArea = ref(null)
+const pageStructure = ref([])
+const juzStart = ref(false)
 
 const styles = {
   fontSize: `${state.fontSize}px`,
   letterSpacing: state.letterSpacing,
-  textColor: state.textColor,
+  color: state.textColor,
   backgroundColor: state.backgroundColor,
 }
 const contentStyles = {
@@ -47,29 +50,53 @@ const contentStyles = {
 
 onMounted(() => {
   currentPage.value = getPage()
+  createPageStructure()
 })
 
-// const currentPageText = computed(() => {
-//   return currentPage.value.length
-//     ? createPage()
-//     : ''
-// })
-
-// const createPage = () => {
-//   let pageText = {}
-//   currentPage.value.forEach(item => {
-
-//   })
-// }
+const getCurrentPageAyahs = () => {
+  return state.quran.flatMap(item =>
+    item.ayahs.filter(ayah => ayah.page === state.currentPage)
+  );
+};
 
 const getPage = () => {
-  const text = []
-  state.quran.forEach(item => {
-    item.ayahs.forEach(ayah => {
-      if (ayah.page === state.currentPage) text.push(ayah)
+  const text = getCurrentPageAyahs()
+  juzStart.value = text[0].juzStart
+  return splitBySuraStart(text)
+}
+
+const createPageStructure = () => {
+  currentPage.value.forEach(item => {
+    pageStructure.value.push({
+      number: item[0].numberInSurah === 1 ? item[0].number : 0,
+      text: item.map(ayah => `
+      <span>${ayah.text}</span>
+      ${ayah.sajda ? `<img src="${sajdaIcon}" class="indicator"/>` : ''}
+      ${((ayah.hizbQuarter % 8) - 2 === 0) && ayah.hizbQuarterEnd ? `<img src="${qtr}" class="indicator"/>` : ''}
+      ${((ayah.hizbQuarter % 8) - 4 === 0) && ayah.hizbQuarterEnd ? `<img src="${half}" class="indicator"/>` : ''}
+      ${((ayah.hizbQuarter % 8) - 6 === 0) && ayah.hizbQuarterEnd ? `<img src="${tqtr}" class="indicator"/>` : ''}
+      `).join(' ')
     })
+  })
+}
+
+function splitBySuraStart(text) {
+  const result = [];
+  let current = [];
+
+  text.forEach((item, index) => {
+    if (item.numberInSurah === 1 && current.length > 0) {
+      result.push(current);
+      current = [];
+    }
+    current.push(item);
   });
-  return text
+
+  if (current.length > 0) {
+    result.push(current);
+  }
+
+  return result;
 }
 
 const getSuraNumber = (number) => {
@@ -94,18 +121,22 @@ const { direction } = useSwipe(swipeArea, {
 </script>
 <style scoped>
 .content {
+  min-height: 100vh;
   overflow-x: hidden;
 }
 .text {
   direction: rtl;
   font-family: var(--arabic-indo-pak-font);
-  margin: 8px;
+  margin-right: 4px;
   padding: 8px;
   text-align: justify;
   text-decoration: underline;
   text-underline-offset: 15px;
   text-decoration-thickness: 2px;
-  word-break: break-all;
-  word-wrap: break-word;
+}
+::v-deep(.indicator) {
+  height: 50px;
+  margin: 0;
+  vertical-align: bottom;
 }
 </style>

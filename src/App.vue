@@ -51,33 +51,39 @@ watch(
   height: 100dvh;
 }
 /* Slide Left (Next Page) */
-.slide-left-enter-active,
+.slide-left-enter-active{
+transition: transform 0.3s ease;
+}
 .slide-left-leave-active {
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease;
 }
 .slide-left-enter-from {
-  transform: translateX(100%);
+  transform: translateX(50%);
 }
 .slide-left-leave-to {
-  transform: translateX(-100%);
+  transform: translateX(-50%);
 }
 
 /* Slide Right (Previous Page) */
-.slide-right-enter-active,
+.slide-right-enter-active{
+transition: transform 0.4s ease;
+}
 .slide-right-leave-active {
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease;
 }
 .slide-right-enter-from {
-  transform: translateX(-100%);
+  transform: translateX(-50%);
 }
 .slide-right-leave-to {
-  transform: translateX(100%);
+  transform: translateX(50%);
 }
 
 /* Optional fade for other routes */
-.fade-enter-active,
+.fade-enter-active{
+transition: opacity 0.4s ease;
+}
 .fade-leave-active {
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 .fade-enter-from,
 .fade-leave-to {

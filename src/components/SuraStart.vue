@@ -1,11 +1,13 @@
 <template>
-  <div class="new-sura">
-    <p class="new-sura-english-name">{{ `${surahDetails?.number} - ${surahDetails?.englishName}` }}</p>
-    <p class="new-sura-length">{{ surahDetails?.numberOfAyahs }}</p>
-    <p class="new-sura-location">{{ surahDetails?.revelationType }}</p>
-    <p class="new-sura-arabic-name">{{ `${surahDetails?.number} - ${surahDetails?.name}` }}</p>
+  <div class="sura-start">
+    <div class="new-sura">
+      <p class="new-sura-english-name">{{ `${surahDetails?.number} - ${surahDetails?.englishName}` }}</p>
+      <p class="new-sura-length">{{ surahDetails?.numberOfAyahs }}</p>
+      <p class="new-sura-location">{{ surahDetails?.revelationType }}</p>
+      <p class="new-sura-arabic-name">{{ `${surahDetails?.number} - ${surahDetails?.name}` }}</p>
+    </div>
+    <p v-if="suraNumber !== 9" class="start">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِیْمِ</p>
   </div>
-  <p class="start">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِیْمِ</p>
 </template>
 <script setup>
 import { onMounted, ref } from 'vue';
@@ -20,11 +22,13 @@ onMounted(() => {
 })
 </script>
 <style scoped>
+.sura-start {
+  margin: 4px 0 8px 0;
+}
 .new-sura {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: relative;
   background-color: #ccc;
   padding: 8px 25px;
   font-weight: 700;
@@ -32,21 +36,21 @@ onMounted(() => {
   font-size: 14px;
   width: 100%;
 }
-.new-sura:before, .new-sura:after {
+.start:before, .start:after {
   content: '';
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   position: absolute;
-  bottom: -60px;
+  bottom: 10px;
   transform: rotate(45deg);
   background-color: #ccc;
   z-index: 1;
 }
-.new-sura:before {
-  left: -25px;
+.start:before {
+  left: -20px;
 }
-.new-sura:after {
-  right: -25px;
+.start:after {
+  right: -20px;
 }
 .start {
   text-align: center;
@@ -54,6 +58,7 @@ onMounted(() => {
   font-weight: 700;
   padding: 16px;
   border: 5px solid #ccc;
+  position: relative;
 }
 .new-sura-arabic-name {
   direction: rtl;
