@@ -1,1 +1,0 @@
-import{P as e}from"./Page-Ci-_t1U1.js";import{m as r,o as a}from"./index-W9B79CUb.js";const c={__name:"NextPage",props:{pageNumber:[Number,String]},setup(o){return(t,p)=>(a(),r(e))}};export{c as default};
