@@ -7,7 +7,7 @@
 </template>
 <script setup>
 import { computed } from 'vue';
-import { useState } from '../store/state';
+import { useState } from '@store/state';
 
 const state = useState()
 const manzilNumber = computed(() => {

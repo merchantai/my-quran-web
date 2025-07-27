@@ -12,7 +12,7 @@
 <script setup>
 import { nextTick, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useState } from '../store/state';
+import { useState } from '@store/state';
 
 const router = useRouter()
 const state = useState()

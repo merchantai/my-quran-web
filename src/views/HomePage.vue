@@ -22,9 +22,9 @@ import { useState } from '@store/state'
 import { useRouter } from 'vue-router'
 import { BottomSheet } from '@nosadev/vue-bottom-sheet'
 import { shallowRef, ref } from 'vue'
-import PageSelect from '../components/PageSelect.vue'
-import SuraSelect from '../components/SuraSelect.vue'
-import JuzSelect from '../components/JuzSelect.vue'
+import PageSelect from '@components/PageSelect.vue'
+import SuraSelect from '@components/SuraSelect.vue'
+import JuzSelect from '@components/JuzSelect.vue'
 
 const state = useState();
 const router = useRouter();
