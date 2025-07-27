@@ -1,1 +1,0 @@
-import{P as e}from"./Page-DZmY2bFG.js";import{m as r,o}from"./index-C7OPEKj1.js";const c={__name:"PreviousPage",props:{pageNumber:[Number,String]},setup(a){return(t,p)=>(o(),r(e))}};export{c as default};
