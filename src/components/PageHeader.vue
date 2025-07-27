@@ -4,7 +4,7 @@
       <p v-for="item in suraNames" :key="item.number">{{ item.number }} - {{ item.name }}</p>
     </div>
     <p class="page-number"> {{ state.currentPage }}</p>
-    <p class="juz-number">Juz - {{ juzNumber }}</p>
+    <p class="juz-number">{{ juzName }} - {{ juzNumber }}</p>
   </div>
 </template>
 <script setup>
@@ -21,6 +21,11 @@ const juzNumber = computed(() => {
     item.ayahs.filter(ayah => ayah.page === state.currentPage)
   );
   return page[0]?.juz
+})
+
+const juzName = computed(() => {
+  const juzDetails = (state.quranInfo.juzs.references.find(item => item.juz === juzNumber.value))
+  return juzDetails?.name
 })
 
 const styles = computed(() => {

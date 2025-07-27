@@ -1,8 +1,8 @@
 <template>
   <div class="page-footer">
-    <p class="juz-number"> Juz - {{ juz }}</p>
+    <p class="juz-number"> {{ juzName }} - {{ juz }}</p>
     <p class="page-number">{{ state.currentPage }}</p>
-    <p class="manzil-number">Manzil - {{ manzilNumber }}</p>
+    <p class="manzil-number">منزل - {{ manzilNumber }}</p>
   </div>
 </template>
 <script setup>
@@ -22,6 +22,11 @@ const juz = computed(() => {
     item.ayahs.filter(ayah => ayah.page === state.currentPage)
   );
   return page[0]?.juz
+})
+
+const juzName = computed(() => {
+  const juzDetails = (state.quranInfo.juzs.references.find(item => item.juz === juz.value))
+  return juzDetails?.name
 })
 
 </script>
