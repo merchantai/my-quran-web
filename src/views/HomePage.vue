@@ -25,6 +25,7 @@ import { shallowRef, ref } from 'vue'
 import PageSelect from '@components/PageSelect.vue'
 import SuraSelect from '@components/SuraSelect.vue'
 import JuzSelect from '@components/JuzSelect.vue'
+import Bookmarks from '@components/Bookmarks.vue'
 
 const state = useState();
 const router = useRouter();
@@ -64,8 +65,12 @@ const goToRoute = (title) => {
       showSheet.value = true
       break
     case 'Bookmarks':
+      selectedComponent.value = Bookmarks
+      bottomSheetTitle.value = 'Bookmarks'
+      showSheet.value = true
       break
     case 'Settings':
+      router.push({name: 'SettingsPage'})
       break
   }
 }

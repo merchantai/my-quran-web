@@ -59,6 +59,13 @@ export const useState = defineStore('state', {
     setLetterSpacing(value) { this.letterSpacing = value },
     setTextColor(value) { this.textColor = value },
     setBackgroundColor(value) { this.backgroundColor = value },
+    addBookmark(page) { this.bookmarks.push(page).sort() },
+    deleteBookmark(page) { this.bookmarks = this.bookmarks.filter(item => item !== page).sort() },
+    toggleBookmark(page) {
+      const index = this.bookmarks.indexOf(page)
+      if (index === -1) this.bookmarks.push(page).sort()
+      else this.bookmarks.filter(item => item !== page).sort()
+    },
 
     setCurrentPageNumber(value) { this.currentPage = value },
 

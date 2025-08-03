@@ -17,10 +17,14 @@ const emit = defineEmits(['closeSheet'])
 
 const gotoJuz = (juzNumber) => {
   let currentPage = null
-  for (let sura of state.quran) {
-    if (sura.ayahs.some(item => item.juz === juzNumber && item.juzStart)) {
-      currentPage = sura.ayahs.find(item => item.juz === juzNumber && item.juzStart).page
-      break
+  if (juzNumber === 1) {
+    currentPage = 1
+  } else {
+    for (let sura of state.quran) {
+      if (sura.ayahs.some(item => item.juz === juzNumber && item.juzStart)) {
+        currentPage = sura.ayahs.find(item => item.juz === juzNumber && item.juzStart).page
+        break
+      }
     }
   }
   state.setCurrentPageNumber(currentPage)
