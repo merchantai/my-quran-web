@@ -39,7 +39,7 @@ const juzStart = ref(false)
 
 const styles = {
   fontSize: `${state.fontSize}px`,
-  letterSpacing: state.letterSpacing,
+  letterSpacing: `${state.letterSpacing}px`,
   color: state.textColor,
   backgroundColor: state.backgroundColor,
 }
@@ -133,6 +133,8 @@ const { direction } = useSwipe(swipeArea, {
   text-decoration: underline;
   text-underline-offset: 15px;
   text-decoration-thickness: 2px;
+  text-wrap: none;
+  word-break: keep-all;
 }
 ::v-deep(.indicator) {
   height: 50px;

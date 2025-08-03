@@ -16,4 +16,10 @@ export default [
     component: () => import('@views/PreviousPage.vue'),
     props: true
   },
+  {
+    path: '/settings',
+    name: 'SettingsPage',
+    component: () => import('@views/SettingsPage.vue'),
+    props: true
+  },
 ]
