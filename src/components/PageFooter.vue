@@ -1,5 +1,5 @@
 <template>
-  <div class="page-footer">
+  <div class="page-footer" :style="styles">
     <p class="juz-number"> {{ juzName }} - {{ juz }}</p>
     <p class="page-number">{{ state.currentPage }}</p>
     <p class="manzil-number">منزل - {{ manzilNumber }}</p>
@@ -10,6 +10,10 @@ import { computed } from 'vue';
 import { useState } from '@store/state';
 
 const state = useState()
+const styles = computed(() => { return {
+  backgroundColor: state.backgroundColor,
+  color: state.textColor
+}})
 const manzilNumber = computed(() => {
   const page = state.quran.flatMap(item =>
     item.ayahs.filter(ayah => ayah.page === state.currentPage)

@@ -25,12 +25,14 @@
           <div class="color-picker">
             <p>Text color</p>
             <div class="text-color-picker" :style="{backgroundColor: textColor}" @click.self="showTextColorPicker = true"></div>
-            <ColorPickerPopup
-              v-if="showTextColorPicker"
-              v-model="showTextColorPicker"
-              :initialColor="textColor"
-              @colorSelected="onTextColorChange"
-            />
+            <Teleport to="body">
+              <ColorPickerPopup
+                v-if="showTextColorPicker"
+                v-model="showTextColorPicker"
+                :initialColor="textColor"
+                @colorSelected="onTextColorChange"
+              />
+            </Teleport>
           </div>
         </div>
         <div class="item">

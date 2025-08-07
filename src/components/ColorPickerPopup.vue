@@ -2,7 +2,14 @@
   <div class="popup-overlay" @click.self="close">
     <div class="popup">
       <h3 class="title">Select a Color</h3>
-      <ColorPicker class="picker" v-model="tempColor" format="hex" @changeColor="updateColor" />
+      <ColorPicker
+        v-model:pureColor="tempColor"
+        format="hex"
+        shape="square"
+        useType="pure"
+        :isWidget="true"
+        class="picker"
+      />
       <div class="actions">
         <button @click="emitColor">Select</button>
         <button @click="close">Cancel</button>
@@ -12,21 +19,26 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import ColorPicker from '@caohenghu/vue-colorpicker'
+import { ref, watch } from 'vue'
+import {ColorPicker} from 'vue3-colorpicker'
+import 'vue3-colorpicker/style.css'
 
 const props = defineProps({
-  modelValue: { type: Boolean, required: true },         // popup visibility
-  initialColor: { type: String, default: '#ff0000' }     // initial color
+  modelValue: { type: Boolean, required: true },
+  initialColor: { type: String, default: '#ff0000' }
 })
 const emit = defineEmits(['update:modelValue', 'colorSelected'])
 
 const tempColor = ref(props.initialColor)
 
-const close = () => emit('update:modelValue', false)
+// Update color if initialColor prop changes
+watch(() => props.initialColor, (newColor) => {
+  tempColor.value = newColor
+})
 
-const updateColor = (val) => {
-  tempColor.value = val.hex }
+const close = () => {
+  emit('update:modelValue', false)
+}
 
 const emitColor = () => {
   emit('colorSelected', tempColor.value)
@@ -47,22 +59,22 @@ const emitColor = () => {
   justify-content: center;
   z-index: 999;
 }
-.title {
-  font-family: var(--english-fonts);
-  font-size: 20px;
-  margin-bottom: 20px;
-  color: #0e3131;
-}
-.picker {
-  margin: 0 auto;
-  width: 90%;
-  overflow: hidden;
-}
 .popup {
   background: white;
   padding: 1.5rem;
   border-radius: 8px;
-  width: 300px;
+  width: 90%;
+  max-width: 400px;
+}
+.title {
+  font-family: sans-serif;
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #0e3131;
+  text-align: center;
+}
+::v-deep(.vc-colorpicker) {
+  margin: 0 auto;
 }
 .actions {
   display: flex;
@@ -71,11 +83,12 @@ const emitColor = () => {
   gap: 10px;
 }
 .actions button {
-  font-family: var(--english-fonts);
+  font-family: sans-serif;
   border: none;
   background-color: #0e3131;
   color: #fff;
   padding: 10px 20px;
   border-radius: 8px;
+  cursor: pointer;
 }
 </style>
