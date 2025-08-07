@@ -58,6 +58,7 @@ onMounted(() => {
   font-weight: 700;
   padding: 16px;
   border: 5px solid #ccc;
+  background-color: #fff;
   position: relative;
 }
 .new-sura-arabic-name {
