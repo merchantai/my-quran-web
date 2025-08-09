@@ -1,5 +1,9 @@
 <template>
   <div class="page">
+    <div @click="toggleBookmark">
+      <img class="bookmark" v-if="isBookmark" src="@/assets/icons/bookmark-selected.svg" alt="add bookmark">
+      <img class="bookmark" v-if="!isBookmark" src="@/assets/icons/bookmark-empty.svg" alt="add bookmark">
+    </div>
     <div class="header">
       <PageHeader :juzStart="juzStart"/>
     </div>
@@ -18,7 +22,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useState } from '@store/state'
 import { useSwipe } from '@vueuse/core'
@@ -52,6 +56,14 @@ onMounted(() => {
   currentPage.value = getPage()
   createPageStructure()
 })
+const isBookmark = computed(() => {
+  return state.bookmarks.indexOf(state.currentPage) !== -1
+})
+
+const toggleBookmark = () => {
+  state.toggleBookmark(state.currentPage);
+}
+ 
 
 const getCurrentPageAyahs = () => {
   return state.quran.flatMap(item =>
@@ -123,6 +135,13 @@ const { direction } = useSwipe(swipeArea, {
 .content {
   min-height: 100vh;
   overflow-x: hidden;
+}
+.bookmark {
+  position: fixed;
+  top: 0;
+  right: 10px;
+  height: 60px;
+  z-index: 100;
 }
 .text {
   direction: rtl;
