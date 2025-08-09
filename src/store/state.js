@@ -63,8 +63,9 @@ export const useState = defineStore('state', {
     deleteBookmark(page) { this.bookmarks = this.bookmarks.filter(item => item !== page).sort() },
     toggleBookmark(page) {
       const index = this.bookmarks.indexOf(page)
-      if (index === -1) this.bookmarks.push(page).sort()
-      else this.bookmarks.filter(item => item !== page).sort()
+      if (index === -1) this.bookmarks.push(page)
+      else this.bookmarks = this.bookmarks.filter(item => item !== page)
+    this.bookmarks = this.bookmarks.sort()
     },
 
     setCurrentPageNumber(value) { this.currentPage = value },

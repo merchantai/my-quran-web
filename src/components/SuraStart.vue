@@ -6,16 +6,17 @@
       <p class="new-sura-location">{{ surahDetails?.revelationType }}</p>
       <p class="new-sura-arabic-name">{{ `${surahDetails?.number} - ${surahDetails?.name}` }}</p>
     </div>
-    <p v-if="suraNumber !== 9" class="start">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِیْمِ</p>
+    <p v-if="suraNumber !== 9" class="start" :style="styles">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِیْمِ</p>
   </div>
 </template>
 <script setup>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useState } from '@store/state';
 
 const props = defineProps({suraNumber: Number})
 const state = useState()
 const surahDetails = ref(null)
+const styles = computed(() => { return { backgroundColor: state.backgroundColor, color: state.textColor }})
 
 onMounted(() => {
   surahDetails.value = state.quranInfo.surahs.references.find(item => item.number === props.suraNumber)
@@ -58,7 +59,6 @@ onMounted(() => {
   font-weight: 700;
   padding: 16px;
   border: 5px solid #ccc;
-  background-color: #fff;
   position: relative;
 }
 .new-sura-arabic-name {
