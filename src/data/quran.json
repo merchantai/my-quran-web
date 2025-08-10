@@ -6,23 +6,11 @@
       "englishNameTranslation": "The Opening",
       "revelationType": "Meccan",
       "ayahs": [
-        {
-          "text": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِیْمِ\uF61E",
-          "number": 1,
-          "numberInSurah": 1,
-          "juz": 1,
-          "manzil": 1,
-          "page": 1,
-          "ruku": 1,
-          "hizbQuarter": 1,
-          "sajda": false,
-          "juzStart": false,
-          "rukuEnd": false
-        },
+        
         {
           "text": "اَلْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِیْنَۙ\uF500",
           "number": 2,
-          "numberInSurah": 2,
+          "numberInSurah": 1,
           "juz": 1,
           "manzil": 1,
           "page": 1,
