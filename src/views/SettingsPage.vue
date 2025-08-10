@@ -12,7 +12,7 @@
         <div class="item">
           <div class="slider-container">
             <label for="textSize">Text size: {{ textSize }}</label>
-            <input type="range" id="textSize" min="10" max="50" v-model="textSize" @input="handleTextSizeChange" />
+            <input type="range" id="textSize" min="10" max="60" v-model="textSize" @input="handleTextSizeChange" />
           </div>
         </div>
         <div class="item">

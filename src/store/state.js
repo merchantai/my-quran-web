@@ -1,9 +1,10 @@
 import { defineStore } from 'pinia'
 import QURAN from '@data/quran.json'
 import QURAN_INFO from '@data/quranMeta.json'
+import homeTiles from './homeTiles'
 
-export const useState = defineStore('state', {
-  state: () => ({
+const getState = () => {
+  return {
     firstLoad: true,
     quran: QURAN,
     quranInfo: QURAN_INFO,
@@ -18,39 +19,11 @@ export const useState = defineStore('state', {
     letterSpacing: 0,
     textColor: '#000',
     backgroundColor: '#fff',
-    homeTiles: [
-      {
-        title: 'Resume',
-        icon: '@assets/icons/book.png',
-        route: 'NextPage',
-      },
-      {
-        title: 'Goto Page No',
-        icon: '@assets/icons/goto.png',
-        route: 'NextPage',
-      },
-      {
-        title: 'GoTo Surah',
-        icon: '@assets/icons/goto.png',
-        route: 'NextPage',
-      },
-      {
-        title: 'GoTo Juz',
-        icon: '@assets/icons/goto.png',
-        route: 'NextPage',
-      },
-      {
-        title: 'Bookmarks',
-        icon: '@assets/icons/bookmark-white.png',
-        route: 'BookmarksPage',
-      },
-      {
-        title: 'Settings',
-        icon: '@assets/icons/settings.png',
-        route: 'SettingsPage',
-      },
-    ],
-  }),
+    homeTiles: homeTiles,
+}}
+
+export const useState = defineStore('state', {
+  state: () => getState(),
   // persist: {
   //   key: 'my-quran-web',
   // },
@@ -71,54 +44,7 @@ export const useState = defineStore('state', {
     setCurrentPageNumber(value) { this.currentPage = value },
 
     initializeDefaults() {
-      if (this.firstLoad) {
-        this.quran = QURAN
-        this.quranInfo = QURAN_INFO
-        this.firstLoad = false
-        this.lastPage = 604,
-        this.firstPage = 1,
-        this.currentPage = 582,
-        this.currentPageText = null,
-        this.currentPageSura = null,
-        this.currentPageJuz = null,
-        this.bookmarks = [],
-        this.fontSize = 35,
-        this.letterSpacing = 0,
-        this.textColor = '#000',
-        this.backgroundColor = '#fff',
-        this.homeTiles = [
-          {
-            title: 'Resume',
-            icon: 'book.png',
-            route: 'NextPage',
-          },
-          {
-            title: 'Goto Page No',
-            icon: 'goto.png',
-            route: 'NextPage',
-          },
-          {
-            title: 'GoTo Surah',
-            icon: 'goto.png',
-            route: 'NextPage',
-          },
-          {
-            title: 'GoTo Juz',
-            icon: 'goto.png',
-            route: 'NextPage',
-          },
-          {
-            title: 'Bookmarks',
-            icon: 'bookmark-white.png',
-            route: 'BookmarksPage',
-          },
-          {
-            title: 'Settings',
-            icon: 'settings.png',
-            route: 'SettingsPage',
-          },
-        ]
-      }
+      if (this.firstLoad) getState()
     },
   },
 });

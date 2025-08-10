@@ -108,4 +108,7 @@ const deleteBookmark = (page) => {
   direction: rtl;
   text-align: right;
 }
+.page-no {
+  font-family: var(--english-fonts);
+}
 </style>

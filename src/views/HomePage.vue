@@ -1,6 +1,5 @@
 <template>
   <div class="home-page">
-    <h1 class="home-title">My Quran</h1>
     <img src="@/assets/icons/title-text.svg" alt="quran text" class="quran-image">
     <h2 class="home-tasmiah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِیْمِ</h2>
     <div class="cards-container">
