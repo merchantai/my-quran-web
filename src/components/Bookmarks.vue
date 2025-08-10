@@ -11,7 +11,7 @@
           <p class="text" v-for="item in getSuraNames(bookmark)" :key="item.number">{{ item.number }} - {{ item.name }}</p>
         </div>
       </div>
-      <img class="delete-bookmark" @click.stop="deleteBookmark(bookmark)" src="@/assets/icons/delete.svg" alt="delete bookmark">
+      <img class="delete-bookmark" @click.stop="toggleBookmark(bookmark)" src="@/assets/icons/delete.svg" alt="delete bookmark">
     </div>
   </div>
 </template>
@@ -60,8 +60,8 @@ const gotoBookmark = (page) => {
   nextTick(() => router.push({name: 'nextPage', params: {pageNumber: state.currentPage}}))
 }
 
-const deleteBookmark = (page) => {
-  state.deleteBookmark(page)
+const toggleBookmark = (page) => {
+  state.toggleBookmark(page)
 }
 </script>
 <style scoped>
