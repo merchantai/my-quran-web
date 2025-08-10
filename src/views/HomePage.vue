@@ -81,6 +81,7 @@ const goToRoute = (title) => {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  overflow-y: auto;
 }
 .quran-image {
   width: 150px;
