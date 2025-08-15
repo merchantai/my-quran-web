@@ -29,6 +29,7 @@
               <ColorPickerPopup
                 v-if="showTextColorPicker"
                 v-model="showTextColorPicker"
+                :disableHistory="true"
                 :initialColor="textColor"
                 @colorSelected="onTextColorChange"
               />
@@ -43,6 +44,7 @@
               v-if="showBackgroundColorPicker"
               v-model="showBackgroundColorPicker"
               :initialColor="backgroundColor"
+              :disableHistory="true"
               @colorSelected="onBackgroundColorChange"
             />
           </div>

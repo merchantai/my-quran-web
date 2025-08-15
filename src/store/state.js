@@ -8,7 +8,7 @@ const getState = () => {
     firstLoad: true,
     quran: QURAN,
     quranInfo: QURAN_INFO,
-    lastPage: 607,
+    lastPage: 610,
     firstPage: 1,
     currentPage: 1,
     currentPageText: null,
