@@ -67,7 +67,7 @@ if (!self.define) {
     });
   };
 }
-define(['./workbox-75f70841'], (function (workbox) { 'use strict';
+define(['./workbox-dd6feabc'], (function (workbox) { 'use strict';
 
   self.skipWaiting();
   workbox.clientsClaim();
@@ -78,8 +78,11 @@ define(['./workbox-75f70841'], (function (workbox) { 'use strict';
    * See https://goo.gl/S9QRab
    */
   workbox.precacheAndRoute([{
+    "url": "registerSW.js",
+    "revision": "3ca0b8505b4bec776b69afdba2768812"
+  }, {
     "url": "index.html",
-    "revision": "0.92ajp3tomtg"
+    "revision": "0.q7aisb8j238"
   }], {});
   workbox.cleanupOutdatedCaches();
   workbox.registerRoute(new workbox.NavigationRoute(workbox.createHandlerBoundToURL("index.html"), {
@@ -88,23 +91,20 @@ define(['./workbox-75f70841'], (function (workbox) { 'use strict';
   workbox.registerRoute(({
     request
   }) => request.destination === "document", new workbox.NetworkFirst({
-    "cacheName": "html-cache",
+    "cacheName": "pages",
     plugins: []
   }), 'GET');
   workbox.registerRoute(({
     request
-  }) => ["script", "style", "worker"].includes(request.destination), new workbox.CacheFirst({
-    "cacheName": "asset-cache",
+  }) => request.destination === "script" || request.destination === "style", new workbox.StaleWhileRevalidate({
+    "cacheName": "assets",
     plugins: []
   }), 'GET');
   workbox.registerRoute(({
     request
-  }) => ["image", "font"].includes(request.destination), new workbox.CacheFirst({
-    "cacheName": "static-resources",
-    plugins: [new workbox.ExpirationPlugin({
-      maxEntries: 60,
-      maxAgeSeconds: 2592000
-    })]
+  }) => request.destination === "image", new workbox.CacheFirst({
+    "cacheName": "images",
+    plugins: []
   }), 'GET');
 
 }));

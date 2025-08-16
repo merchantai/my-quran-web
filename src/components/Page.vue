@@ -30,9 +30,9 @@ import PageHeader from '@components/PageHeader.vue'
 import PageFooter from '@components/PageFooter.vue'
 import SuraStart from '@components/SuraStart.vue'
 import sajdaIcon from '@/assets/icons/sajda.svg'
-import qtr from '@/assets/icons/qtr.svg'
-import tqtr from '@/assets/icons/tqtr.svg'
-import half from '@/assets/icons/half.svg'
+import qtr from '@assets/icons/qtr.svg'
+import tqtr from '@assets/icons/tqtr.svg'
+import half from '@assets/icons/half.svg'
 
 const state = useState()
 const router = useRouter()

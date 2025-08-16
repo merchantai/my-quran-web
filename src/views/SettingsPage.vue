@@ -55,8 +55,8 @@
 </template>
 <script setup>
 import { computed, ref } from 'vue';
-import { useState } from '../store/state';
-import ColorPickerPopup from '../components/ColorPickerPopup.vue';
+import { useState } from '@store/state';
+import ColorPickerPopup from '@components/ColorPickerPopup.vue';
 
 const state = useState()
 const textStyles = computed(() => {

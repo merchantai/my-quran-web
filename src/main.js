@@ -5,6 +5,7 @@ import router from './router';
 import pinia from './store';
 import Vue3ColorPicker from "vue3-colorpicker";
 import "vue3-colorpicker/style.css";
+import './registerServiceWorker' 
 
 createApp(App)
   .use(router)

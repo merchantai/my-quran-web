@@ -1,5 +1,5 @@
 {
-  "name": "my-quran-web",
+  "name": "al-quran",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -13,6 +13,7 @@
     "@vueuse/core": "^13.5.0",
     "pinia": "^3.0.3",
     "pinia-plugin-persistedstate": "^4.4.1",
+    "vite-plugin-pwa": "^1.0.2",
     "vue": "^3.5.17",
     "vue-router": "^4.5.1",
     "vue3-colorpicker": "^2.3.0"
