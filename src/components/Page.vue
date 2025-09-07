@@ -30,9 +30,9 @@ import PageHeader from '@components/PageHeader.vue'
 import PageFooter from '@components/PageFooter.vue'
 import SuraStart from '@components/SuraStart.vue'
 import sajdaIcon from '@/assets/icons/sajda.svg'
-import qtr from '@assets/icons/qtr.svg'
-import tqtr from '@assets/icons/tqtr.svg'
-import half from '@assets/icons/half.svg'
+import qtr from '@/assets/icons/qtr.svg'
+import tqtr from '@/assets/icons/tqtr.svg'
+import half from '@/assets/icons/half.svg'
 
 const state = useState()
 const router = useRouter()
@@ -148,11 +148,12 @@ const { direction } = useSwipe(swipeArea, {
   font-family: var(--arabic-indo-pak-font);
   margin-right: 4px;
   padding: 8px;
+  text-align: justify;
   text-decoration: underline;
   text-underline-offset: 15px;
   text-decoration-thickness: 2px;
-  word-break: break-word;
-  overflow-wrap: anywhere;
+  text-wrap: none;
+  word-break: keep-all;
 }
 ::v-deep(.indicator) {
   height: 50px;
