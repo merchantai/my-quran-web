@@ -107,6 +107,7 @@ const toggleBookmark = (page) => {
   font-weight: 700;
   direction: rtl;
   text-align: right;
+  font-family: var(--arabic-indo-pak-font);
 }
 .page-no {
   font-family: var(--english-fonts);
