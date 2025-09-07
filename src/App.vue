@@ -1,7 +1,6 @@
 
 <template>
   <div class="main-app">
-    <PwaInstallPrompt v-if="route.path === '/'"/> 
     <RouterView v-slot="{ Component }">
       <transition :name="transitionName" mode="out-in">
         <component :is="Component" :key="$route.fullPath" />
@@ -11,36 +10,13 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useState } from './store/state'
-import PwaInstallPrompt from '@components/PwaInstallPrompt.vue'
-import "./registerServiceWorker"
 
 const state = useState();
 onMounted(() => {
   state.initializeDefaults()
-  state.refreshInstallStatus()
-
-  // If user installs the app
-  const onAppInstalled = () => state.setInstalled(true)
-  window.addEventListener('appinstalled', onAppInstalled)
-
-  // If display-mode changes (Chrome/Android supports this)
-  const mql = window.matchMedia?.('(display-mode: standalone)')
-  const onDisplayModeChange = (e) => state.setInstalled(e.matches)
-  mql?.addEventListener?.('change', onDisplayModeChange)
-
-  // Re-check when tab visibility changes (covers some iOS cases)
-  const onVisibility = () => state.refreshInstallStatus()
-  document.addEventListener('visibilitychange', onVisibility)
-
-  // cleanup
-  onBeforeUnmount(() => {
-    window.removeEventListener('appinstalled', onAppInstalled)
-    mql?.removeEventListener?.('change', onDisplayModeChange)
-    document.removeEventListener('visibilitychange', onVisibility)
-  })
 })
 
 const route = useRoute()
