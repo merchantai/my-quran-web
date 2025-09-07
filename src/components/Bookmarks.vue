@@ -17,7 +17,7 @@
 </template>
 <script setup>
 import { computed, nextTick, ref } from 'vue';
-import { useState } from '../store/state';
+import { useState } from '@store/state';
 import { useRouter } from 'vue-router';
 
 const state = useState()

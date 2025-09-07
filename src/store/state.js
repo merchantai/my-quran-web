@@ -8,7 +8,7 @@ const getState = () => {
     firstLoad: true,
     quran: QURAN,
     quranInfo: QURAN_INFO,
-    lastPage: 607,
+    lastPage: 610,
     firstPage: 1,
     currentPage: 1,
     currentPageText: null,
@@ -20,29 +20,37 @@ const getState = () => {
     textColor: '#000',
     backgroundColor: '#fff',
     homeTiles: homeTiles,
+    isInstalled: false,
 }}
 
 export const useState = defineStore('state', {
   state: () => getState(),
-  // persist: {
-  //   key: 'my-quran-web',
-  // },
+  persist: {
+    key: 'my-quran-web',
+  },
   actions: {
     setFontSize(value) { this.fontSize = value },
     setLetterSpacing(value) { this.letterSpacing = value },
     setTextColor(value) { this.textColor = value },
     setBackgroundColor(value) { this.backgroundColor = value },
+    setCurrentPageNumber(value) { this.currentPage = value },
     toggleBookmark(page) {
       const index = this.bookmarks.indexOf(page)
       if (index === -1) this.bookmarks.push(page)
       else this.bookmarks = this.bookmarks.filter(item => item !== page)
     this.bookmarks = this.bookmarks.sort()
     },
-
-    setCurrentPageNumber(value) { this.currentPage = value },
-
     initializeDefaults() {
       if (this.firstLoad) getState()
+    },
+    setInstalled(val) {
+      this.isInstalled = val
+    },
+    refreshInstallStatus() {
+      const installed =
+        window.matchMedia?.('(display-mode: standalone)').matches ||
+        window.navigator.standalone === true // iOS
+      this.isInstalled = !!installed
     },
   },
 });
