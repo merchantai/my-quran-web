@@ -148,12 +148,11 @@ const { direction } = useSwipe(swipeArea, {
   font-family: var(--arabic-indo-pak-font);
   margin-right: 4px;
   padding: 8px;
-  text-align: justify;
   text-decoration: underline;
   text-underline-offset: 15px;
   text-decoration-thickness: 2px;
-  text-wrap: none;
-  word-break: keep-all;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 ::v-deep(.indicator) {
   height: 50px;
