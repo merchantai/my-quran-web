@@ -149,10 +149,10 @@ const { direction } = useSwipe(swipeArea, {
   margin-right: 4px;
   padding: 8px;
   text-decoration: underline;
-  text-underline-offset: 15px;
+  text-underline-offset: 20px;
+  line-height: 2;
   text-decoration-thickness: 2px;
-  text-wrap: none;
-  word-break: keep-all;
+  word-spacing: 8px;
 }
 ::v-deep(.indicator) {
   height: 50px;

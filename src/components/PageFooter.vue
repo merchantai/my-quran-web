@@ -46,4 +46,7 @@ const juzName = computed(() => {
   padding: 5px 10px;
   border-radius: 3px;
 }
+.juz-number {
+  font-family: var(--arabic-indo-pak-font);
+}
 </style>

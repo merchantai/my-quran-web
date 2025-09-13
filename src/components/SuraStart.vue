@@ -60,6 +60,7 @@ onMounted(() => {
   padding: 16px;
   border: 5px solid #ccc;
   position: relative;
+  font-family: var(--arabic-indo-pak-font);
 }
 .new-sura-arabic-name {
   direction: rtl;

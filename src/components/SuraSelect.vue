@@ -52,5 +52,6 @@ const suraList = state.quranInfo.surahs.references
 .arabic-name {
   direction: rtl;
   font-family: var(--arabic-indo-pak-font);
+  font-size: 30px;
 }
 </style>

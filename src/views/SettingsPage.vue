@@ -15,12 +15,12 @@
             <input type="range" id="textSize" min="10" max="60" v-model="textSize" @input="handleTextSizeChange" />
           </div>
         </div>
-        <div class="item">
+        <!-- <div class="item">
           <div class="slider-container">
             <label for="letterSpacing">Spacing: {{ letterSpacing }}</label>
             <input type="range" id="letterSpacing" min="0" max="10" v-model="letterSpacing" @input="handleLetterSpacingChange" />
           </div>
-        </div>
+        </div> -->
         <div class="item">
           <div class="color-picker">
             <p>Text color</p>
@@ -75,9 +75,9 @@ const letterSpacing = ref(state.letterSpacing)
 const handleTextSizeChange = () => {
   state.setFontSize(textSize.value)
 }
-const handleLetterSpacingChange = () => {
-  state.setLetterSpacing(letterSpacing.value)
-}
+// const handleLetterSpacingChange = () => {
+//   state.setLetterSpacing(letterSpacing.value)
+// }
 const showTextColorPicker = ref(false)
 const textColor = ref(state.textColor)
 

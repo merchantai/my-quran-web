@@ -50,4 +50,8 @@ const suraList = state.quranInfo.juzs.references
  color: #0e3131;
  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
+.arabic-name {
+  font-family: var(--arabic-indo-pak-font);
+  font-size: 35px;
+}
 </style>
