@@ -24,9 +24,9 @@ const getState = () => {
 
 export const useState = defineStore('state', {
   state: () => getState(),
-  persist: {
-    key: 'my-quran-web',
-  },
+  // persist: {
+  //   key: 'my-quran-web',
+  // },
   actions: {
     setFontSize(value) { this.fontSize = value },
     setLetterSpacing(value) { this.letterSpacing = value },
