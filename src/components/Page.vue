@@ -125,7 +125,7 @@ const { direction } = useSwipe(swipeArea, {
       state.currentPage !== 1 && state.setCurrentPageNumber(state.currentPage - 1)
       router.replace({name: 'previousPage', params: {pageNumber: state.currentPage}})
     } else if (direction.value === 'right') {
-      state.currentPage !== 604 && state.setCurrentPageNumber(state.currentPage + 1)
+      state.currentPage !== state.lastPage && state.setCurrentPageNumber(state.currentPage + 1)
       router.replace({name: 'nextPage', params: {pageNumber: state.currentPage}})
     }
   },
